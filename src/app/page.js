@@ -4,8 +4,11 @@ import ProductCard from '@/components/ProductCard';
 import Image from 'next/image';
 
 export default function Home() {
-  const featuredProduct = products.find((p) => p.id === 'LA-310');
-  const recommendedProducts = products.filter((p) => p.id !== 'LA-310').slice(0, 3);
+  const featuredProduct = products.find((p) => p.id === 'la-fila-gold');
+
+  // console.log('pro',featuredProduct);
+
+  const recommendedProducts = products.filter((p) => p.id !== 'la-fila-gold').slice(0, 3);
 
   return (
     <div className='flex flex-col'>
@@ -61,7 +64,8 @@ export default function Home() {
               />
               <div className='absolute bottom-0 right-0 p-8 bg-surface-container-highest max-w-[280px]'>
                 <p className='font-body text-sm italic text-white/50 leading-relaxed'>
-                  &quot;The thread connects us to our ancestors. Every weave is a whisper of history.&quot;
+                  &quot;The thread connects us to our ancestors. Every weave is a whisper of
+                  history.&quot;
                 </p>
               </div>
             </div>
@@ -143,20 +147,24 @@ export default function Home() {
       <section className='bg-[#0a0a0a] py-24 px-8 lg:px-20 border-y border-white/5'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
-            <span className='text-primary font-label text-sm tracking-[0.3em] uppercase block mb-4'>The Cargo Pant By Lábí</span>
-            <h2 className='text-4xl md:text-6xl font-headline font-bold uppercase tracking-tighter'>The Anatomy of a Monolith</h2>
+            <span className='text-primary font-label text-sm tracking-[0.3em] uppercase block mb-4'>
+              The Cargo Pant By Lábí
+            </span>
+            <h2 className='text-4xl md:text-6xl font-headline font-bold uppercase tracking-tighter'>
+              The Anatomy of a Monolith
+            </h2>
           </div>
-          
+
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <Image 
-              src='/images/about-sokoto.png' 
+            <Image
+              src='/images/about-sokoto.png'
               alt='About Our Sòkòtò Cargo Pant'
               width={1080}
               height={1080}
               className='w-full h-auto object-contain rounded-sm border border-white/10'
             />
-            <Image 
-              src='/images/cargo-pant-details.png' 
+            <Image
+              src='/images/cargo-pant-details.png'
               alt='Cargo Pant Details'
               width={1080}
               height={1080}
@@ -170,20 +178,24 @@ export default function Home() {
       <section className='py-24 px-8 lg:px-20 bg-surface-container-low'>
         <div className='max-w-7xl mx-auto'>
           <div className='text-center mb-16'>
-            <span className='text-primary font-label text-sm tracking-[0.3em] uppercase block mb-4'>Precision fit</span>
-            <h2 className='text-4xl md:text-5xl font-headline font-bold uppercase tracking-tighter'>Fìlà Sizing & Measurement</h2>
+            <span className='text-primary font-label text-sm tracking-[0.3em] uppercase block mb-4'>
+              Precision fit
+            </span>
+            <h2 className='text-4xl md:text-5xl font-headline font-bold uppercase tracking-tighter'>
+              Fìlà Sizing & Measurement
+            </h2>
           </div>
 
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-            <Image 
-              src='/images/measurement.png' 
+            <Image
+              src='/images/measurement.png'
               alt='How to measure'
               width={1080}
               height={1080}
               className='w-full h-auto object-contain rounded-sm border border-white/10'
             />
-            <Image 
-              src='/images/size-chart.png' 
+            <Image
+              src='/images/size-chart.png'
               alt='Size chart'
               width={1080}
               height={1080}
