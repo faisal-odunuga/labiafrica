@@ -3,6 +3,7 @@
 import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 
 const addDays = (dateString, days) => {
@@ -88,8 +89,8 @@ const ReceiptPage = () => {
             <div className="space-y-4">
               {lastOrder.items.map((item) => (
                 <div key={`${item.id}-${item.size}`} className="flex gap-4 border-b border-white/10 pb-4">
-                  <div className="w-16 h-20 bg-surface overflow-hidden shrink-0">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                  <div className="w-16 h-20 bg-surface overflow-hidden shrink-0 relative">
+                    <Image src={item.image} alt={item.name} fill sizes="64px" className="object-cover" />
                   </div>
                   <div className="flex-1">
                     <p className="font-headline font-bold uppercase leading-tight">{item.name}</p>

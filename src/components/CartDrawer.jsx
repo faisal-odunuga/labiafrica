@@ -3,6 +3,7 @@
 import { useCart } from '@/context/CartContext';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const CartDrawer = () => {
   const { cart, isCartOpen, toggleCart, removeFromCart, updateQuantity, totalPrice } = useCart();
@@ -50,8 +51,8 @@ const CartDrawer = () => {
           ) : (
             cart.map((item) => (
               <div key={`${item.id}-${item.size}`} className="flex gap-6 group">
-                <div className="w-24 h-32 bg-surface-container-highest overflow-hidden shrink-0">
-                  <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="w-24 h-32 bg-surface-container-highest overflow-hidden shrink-0 relative">
+                  <Image src={item.image} alt={item.name} fill sizes="96px" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="flex flex-col justify-between flex-1 py-1">
                   <div>

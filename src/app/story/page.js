@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const StoryPage = () => {
   return (
@@ -7,10 +8,12 @@ const StoryPage = () => {
       <header className="relative min-h-screen flex items-end pt-32 pb-20 px-8 lg:px-20 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0e] via-transparent to-transparent z-10"></div>
-          <img 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3JBAxfLBYj5mHawxUKjHtLycADLQieN4uWgU6-Omvy4pE3p2mUtsWH0Xv43LQHw8W0pM6nCWAbnfe5nwtrWRor8_FLKeUPt12WMwy4E-HqBs8zrYF9iJ1npBK1yMdVEjlXRxT1sb_-bpblpCo-tr659H34AXeglETEOPTpsBUwGASBC5JSFFCBNHUy8Gx_t3aWugzd51baosMCcemwfQNFhreK0zD_Ikbj3boUlxGzrZxMsGvGv18CFk9OOVd1Y46epZr0D6SpQ" 
+          <Image 
+            src="/images/sokotos/LA-402.jpeg" 
             alt="Heritage Luxury" 
-            className="w-full h-full object-cover opacity-60 grayscale" 
+            fill
+            priority
+            className="object-cover opacity-60 grayscale" 
           />
         </div>
         <div className="relative z-20 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
@@ -34,8 +37,8 @@ const StoryPage = () => {
       {/* Heritage Section */}
       <section className="py-32 px-8 lg:px-20 bg-background">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-1 relative">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADRdPaPQIp94YzLHwW0O0jBNQ5AdtjrNR13MM2e7C_WEFbz-yNuomUsXgrGc5lL1E815gugHDgk_1ZAZGT93Gvje_m-zAPDInLDFaElE4AO76Q2ClmhqYf6ia5anwJo8p2iZp7yEHVTYUXCfJQqBsNmCXw5KGMuWJkfK8RwFUDWJgIimWJXs2ZHBIJ4952KLOF-7vvtuV5m0eyl8Mxgv46YkOQfytBjkwHzKrBbaiYV_-Sj0rG1leH7HSdSt2R5fCdhXv2OLwiGA" alt="Heritage" className="w-full aspect-[4/5] object-cover" />
+          <div className="order-2 lg:order-1 relative aspect-[4/5] w-full">
+            <Image src="/images/jackets/LA-504.jpeg" alt="Heritage" fill className="object-cover" />
           </div>
           <div className="order-1 lg:order-2">
             <h2 className="font-headline text-5xl font-bold uppercase mb-8 tracking-tighter">The Heritage</h2>
@@ -61,7 +64,7 @@ const StoryPage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2 relative group overflow-hidden h-[500px]">
-              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ5WVvcM0vvM-Y5lEnc39osukDvvMlnd9SRk4H4bAEcMpKsqaaWh1-0KRwZSWNk_agmYaxY4KSEvSOHy4ZOSu5gD2fRQAjUPLuBGVKlXi9SweNHIZtM_aD7V9zK42kVm8PJ05plwEgvh1BJ8jmb6sccsWeUxgNp65eMx-uDIgdqhNobApjI4Pmg5ax57HYsJQJQA_Dv14SZdyqOCr7WNjbr--5xqg9ZN9zXTcVCY-RbYO1HV8H-cNjdkjkLfFQwTIChOWTOlOeng" alt="Loom" className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0" />
+              <Image src="/images/filas/LA-316.jpeg" alt="Loom" fill className="object-cover grayscale transition-all duration-700 group-hover:grayscale-0" />
               <div className="absolute inset-0 bg-black/40 p-10 flex flex-col justify-end">
                 <h3 className="font-headline text-2xl font-bold text-white uppercase mb-2">The Loom</h3>
                 <p className="text-white/70 max-w-xs">Our narrow-strip looms produce fabrics that are inherently durable and structurally superior.</p>

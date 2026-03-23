@@ -5,6 +5,7 @@ import { products } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import ProductCard from '@/components/ProductCard';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const ProductDetail = ({ params }) => {
   const { id } = params;
@@ -24,14 +25,14 @@ const ProductDetail = ({ params }) => {
       <section className="max-w-[1920px] mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 mb-32">
         {/* Images */}
         <div className="md:col-span-7 grid grid-cols-1 gap-4">
-          <div className="aspect-[4/5] bg-surface-container-highest overflow-hidden">
-            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+          <div className="aspect-[4/5] bg-surface-container-highest overflow-hidden relative">
+            <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, 40vw" className="object-cover" />
           </div>
           {product.secondaryImages && (
             <div className="grid grid-cols-2 gap-4">
               {product.secondaryImages.map((img, i) => (
-                <div key={i} className="aspect-square bg-surface-container-highest overflow-hidden">
-                  <img src={img} alt={`${product.name} alternate ${i+1}`} className="w-full h-full object-cover" />
+                <div key={i} className="aspect-square bg-surface-container-highest overflow-hidden relative">
+                  <Image src={img} alt={`${product.name} alternate ${i+1}`} fill sizes="(max-width: 768px) 50vw, 20vw" className="object-cover" />
                 </div>
               ))}
             </div>
@@ -123,7 +124,7 @@ const ProductDetail = ({ params }) => {
             </div>
           </div>
           <div className="aspect-[3/4] bg-surface-container-highest relative">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuChD8Kt-sNzDPWDK2akYxniMHve163DFCLDQpo6NkPg0NmaMr95XgPO3c0BRLMSlzKaxjYDCX7caL4h3iTosGiZMcwqC8OCjc5SyRnrh7UImMbNEcUchbyVG5OoCgo5S3MJKTcGTU1VOOS6G1nzoOMhYxmkAT8mXwJHJiVt8dh0tFtxd_RBvy8DBJdEtbLRtJX1n4HMPxJofUphv2SmDLmeDvT70I0MjK5vIH5oqQqSPe7lpGWqTp_5sFJvLpE5JACVfBeX-KJnpg" alt="Craftsmanship" className="w-full h-full object-cover grayscale brightness-75" />
+            <Image src="/images/about-sokoto.png" alt="Craftsmanship" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover grayscale brightness-75" />
           </div>
         </div>
       </section>

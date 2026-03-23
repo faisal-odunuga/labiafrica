@@ -5,12 +5,20 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
 import { useProducts } from '@/hooks/useProducts';
+import Image from 'next/image';
+
+const categoryBanners = {
+  'Sòkòtò': '/images/sokotos/catalogue.png',
+  'Fìlà': '/images/filas/catalogue.png',
+  'Jackets': '/images/jackets/catalogue.png'
+};
 
 const CatalogPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const queryCategory = searchParams.get('category') || 'All';
+  const heroImage = categoryBanners[queryCategory];
 
   const { categories } = useProducts();
 
@@ -32,20 +40,41 @@ const CatalogPage = () => {
   return (
     <main className="pt-32 pb-20">
       {/* Header Section */}
-      <header className="px-8 mx-auto mb-20 relative">
+      <header className="px-8 mx-auto mb-10 relative">
         <div className="absolute -left-10 top-0 opacity-10 select-none pointer-events-none">
-          <span className="text-9xl font-black font-headline uppercase leading-none text-stroke">HERITAGE</span>
+          <span className="text-9xl font-black font-headline uppercase leading-none text-stroke">
+            {queryCategory === 'All' ? 'HERITAGE' : queryCategory}
+          </span>
         </div>
         <div className="relative z-10">
-          <p className="text-primary font-label text-xs tracking-[0.4em] uppercase mb-4">The Cultural Monolith</p>
+          <p className="text-primary font-label text-xs tracking-[0.4em] uppercase mb-4">
+            {queryCategory === 'All' ? 'The Cultural Monolith' : `${queryCategory} Collection`}
+          </p>
           <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tight uppercase leading-[0.9] mb-6">
-            Our<br/>Catalogue
+            {queryCategory === 'All' ? 'Our' : queryCategory}<br/>Catalogue
           </h1>
           <p className="max-w-xl text-white/50 font-body text-lg leading-relaxed">
-            A dialogue between traditional Aso Oke weaving techniques and the aggressive silhouettes of contemporary Lagos streetwear.
+            {queryCategory === 'All' 
+              ? 'A dialogue between traditional Aso Oke weaving techniques and the aggressive silhouettes of contemporary Lagos streetwear.'
+              : `Explore our exclusive ${queryCategory} collection, merging heritage aesthetics with modern design.`}
           </p>
         </div>
       </header>
+
+      {heroImage && (
+        <div className="px-8 max-w-[1920px] mx-auto mb-20">
+          <div className="w-full relative border border-white/10 bg-surface overflow-hidden">
+            <Image 
+              src={heroImage} 
+              alt={`${queryCategory} Catalogue`} 
+              width={1920}
+              height={1080}
+              className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+              priority
+            />
+          </div>
+        </div>
+      )}
 
       <div className="px-8 max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
         {/* Filter Sidebar */}

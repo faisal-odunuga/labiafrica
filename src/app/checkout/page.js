@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 
 const shippingOptions = [
@@ -292,8 +293,8 @@ const CheckoutPage = () => {
             <div className="space-y-4 max-h-72 overflow-y-auto hide-scrollbar pr-1">
               {cart.map((item) => (
                 <div key={`${item.id}-${item.size}`} className="flex gap-4 border-b border-white/10 pb-4">
-                  <div className="w-16 h-20 bg-surface overflow-hidden shrink-0">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                  <div className="w-16 h-20 bg-surface overflow-hidden shrink-0 relative">
+                    <Image src={item.image} alt={item.name} fill sizes="64px" className="object-cover" />
                   </div>
                   <div className="flex-1">
                     <p className="font-headline font-bold uppercase leading-tight">{item.name}</p>
