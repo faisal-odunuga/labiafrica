@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useMemo } from 'react';
+import { useMemo, Suspense } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { products } from '@/data/products';
 import ProductCard from '@/components/ProductCard';
@@ -8,12 +8,12 @@ import { useProducts } from '@/hooks/useProducts';
 import Image from 'next/image';
 
 const categoryBanners = {
-  'Sòkòtò': '/images/sokotos/catalogue.png',
-  'Fìlà': '/images/filas/catalogue.png',
-  'Jackets': '/images/jackets/catalogue.png'
+  Sòkòtò: '/images/sokotos/catalogue.png',
+  Fìlà: '/images/filas/catalogue.png',
+  Jackets: '/images/jackets/catalogue.png',
 };
 
-const CatalogPage = () => {
+const CatalogContent = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -34,27 +34,29 @@ const CatalogPage = () => {
 
   const filteredProducts = useMemo(() => {
     if (queryCategory === 'All') return products;
-    return products.filter(p => p.category === queryCategory);
+    return products.filter((p) => p.category === queryCategory);
   }, [queryCategory]);
 
   return (
-    <main className="pt-32 pb-20">
+    <main className='pt-32 pb-20'>
       {/* Header Section */}
-      <header className="px-8 mx-auto mb-10 relative">
-        <div className="absolute -left-10 top-0 opacity-10 select-none pointer-events-none">
-          <span className="text-9xl font-black font-headline uppercase leading-none text-stroke">
+      <header className='px-8 mx-auto mb-10 relative'>
+        <div className='absolute -left-10 top-0 opacity-10 select-none pointer-events-none'>
+          <span className='text-9xl font-black font-headline uppercase leading-none text-stroke'>
             {queryCategory === 'All' ? 'HERITAGE' : queryCategory}
           </span>
         </div>
-        <div className="relative z-10">
-          <p className="text-primary font-label text-xs tracking-[0.4em] uppercase mb-4">
+        <div className='relative z-10'>
+          <p className='text-primary font-label text-xs tracking-[0.4em] uppercase mb-4'>
             {queryCategory === 'All' ? 'The Cultural Monolith' : `${queryCategory} Collection`}
           </p>
-          <h1 className="text-6xl md:text-8xl font-headline font-bold tracking-tight uppercase leading-[0.9] mb-6">
-            {queryCategory === 'All' ? 'Our' : queryCategory}<br/>Catalogue
+          <h1 className='text-6xl md:text-8xl font-headline font-bold tracking-tight uppercase leading-[0.9] mb-6'>
+            {queryCategory === 'All' ? 'Our' : queryCategory}
+            <br />
+            Catalogue
           </h1>
-          <p className="max-w-xl text-white/50 font-body text-lg leading-relaxed">
-            {queryCategory === 'All' 
+          <p className='max-w-xl text-white/50 font-body text-lg leading-relaxed'>
+            {queryCategory === 'All'
               ? 'A dialogue between traditional Aso Oke weaving techniques and the aggressive silhouettes of contemporary Lagos streetwear.'
               : `Explore our exclusive ${queryCategory} collection, merging heritage aesthetics with modern design.`}
           </p>
@@ -62,38 +64,46 @@ const CatalogPage = () => {
       </header>
 
       {heroImage && (
-        <div className="px-8 max-w-[1920px] mx-auto mb-20">
-          <div className="w-full relative border border-white/10 bg-surface overflow-hidden">
-            <Image 
-              src={heroImage} 
-              alt={`${queryCategory} Catalogue`} 
+        <div className='px-8 max-w-[1920px] mx-auto mb-20'>
+          <div className='w-full relative border border-white/10 bg-surface overflow-hidden'>
+            <Image
+              src={heroImage}
+              alt={`${queryCategory} Catalogue`}
               width={1920}
               height={1080}
-              className="w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+              className='w-full h-auto object-cover grayscale hover:grayscale-0 transition-all duration-700'
               priority
             />
           </div>
         </div>
       )}
 
-      <div className="px-8 max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+      <div className='px-8 max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12'>
         {/* Filter Sidebar */}
-        <aside className="md:col-span-3 lg:col-span-2 space-y-12">
-          <div className="space-y-6">
-            <h3 className="text-white font-headline font-bold uppercase tracking-widest text-sm border-b border-white/10 pb-2">Categories</h3>
-            <ul className="space-y-4 font-label text-sm uppercase tracking-wider">
-              {categories.map(category => (
+        <aside className='md:col-span-3 lg:col-span-2 space-y-12'>
+          <div className='space-y-6'>
+            <h3 className='text-white font-headline font-bold uppercase tracking-widest text-sm border-b border-white/10 pb-2'>
+              Categories
+            </h3>
+            <ul className='space-y-4 font-label text-sm uppercase tracking-wider'>
+              {categories.map((category) => (
                 <li key={category}>
-                  <button 
+                  <button
                     onClick={() => handleCategoryChange(category)}
                     className={cn(
-                      "flex justify-between items-center w-full text-left transition-colors",
-                      queryCategory === category ? "text-primary" : "text-white/50 hover:text-white"
+                      'flex justify-between items-center w-full text-left transition-colors',
+                      queryCategory === category
+                        ? 'text-primary'
+                        : 'text-white/50 hover:text-white',
                     )}
                   >
-                    {category} 
-                    <span className="text-[10px] opacity-50">
-                      ({category === 'All' ? products.length : products.filter(p => p.category === category).length})
+                    {category}
+                    <span className='text-[10px] opacity-50'>
+                      (
+                      {category === 'All'
+                        ? products.length
+                        : products.filter((p) => p.category === category).length}
+                      )
                     </span>
                   </button>
                 </li>
@@ -101,22 +111,34 @@ const CatalogPage = () => {
             </ul>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-white font-headline font-bold uppercase tracking-widest text-sm border-b border-white/10 pb-2">Price Range</h3>
-            <div className="space-y-4">
-              <input type="range" className="w-full accent-primary bg-white/10 appearance-none h-1" min="5000" max="150000" />
-              <div className="flex justify-between text-[10px] font-label text-white/40 tracking-widest uppercase">
+          <div className='space-y-6'>
+            <h3 className='text-white font-headline font-bold uppercase tracking-widest text-sm border-b border-white/10 pb-2'>
+              Price Range
+            </h3>
+            <div className='space-y-4'>
+              <input
+                type='range'
+                className='w-full accent-primary bg-white/10 appearance-none h-1'
+                min='5000'
+                max='150000'
+              />
+              <div className='flex justify-between text-[10px] font-label text-white/40 tracking-widest uppercase'>
                 <span>₦5,000</span>
                 <span>₦150,000</span>
               </div>
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="text-white font-headline font-bold uppercase tracking-widest text-sm border-b border-white/10 pb-2">Sizes</h3>
-            <div className="grid grid-cols-3 gap-2">
-              {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => (
-                <button key={size} className="border border-white/10 py-2 text-xs font-label hover:border-primary hover:text-primary transition-all uppercase">
+          <div className='space-y-6'>
+            <h3 className='text-white font-headline font-bold uppercase tracking-widest text-sm border-b border-white/10 pb-2'>
+              Sizes
+            </h3>
+            <div className='grid grid-cols-3 gap-2'>
+              {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map((size) => (
+                <button
+                  key={size}
+                  className='border border-white/10 py-2 text-xs font-label hover:border-primary hover:text-primary transition-all uppercase'
+                >
                   {size}
                 </button>
               ))}
@@ -125,12 +147,14 @@ const CatalogPage = () => {
         </aside>
 
         {/* Product Grid */}
-        <section className="md:col-span-9 lg:col-span-10">
-          <div className="flex justify-between items-end mb-10 border-b border-white/5 pb-6">
-            <span className="text-[10px] font-label text-white/40 uppercase tracking-[0.3em]">Showing {filteredProducts.length} Results</span>
-            <div className="flex items-center space-x-4 text-[10px] font-label uppercase tracking-widest">
-              <span className="text-white/40">Sort By:</span>
-              <select className="bg-transparent border-none focus:ring-0 text-white cursor-pointer p-0">
+        <section className='md:col-span-9 lg:col-span-10'>
+          <div className='flex justify-between items-end mb-10 border-b border-white/5 pb-6'>
+            <span className='text-[10px] font-label text-white/40 uppercase tracking-[0.3em]'>
+              Showing {filteredProducts.length} Results
+            </span>
+            <div className='flex items-center space-x-4 text-[10px] font-label uppercase tracking-widest'>
+              <span className='text-white/40'>Sort By:</span>
+              <select className='bg-transparent border-none focus:ring-0 text-white cursor-pointer p-0'>
                 <option>Latest Arrival</option>
                 <option>Price: Low to High</option>
                 <option>Price: High to Low</option>
@@ -138,14 +162,26 @@ const CatalogPage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map(product => (
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </section>
       </div>
     </main>
+  );
+};
+
+const CatalogPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className='pt-32 pb-20 text-center text-white/50 min-h-screen'>Loading catalog...</div>
+      }
+    >
+      <CatalogContent />
+    </Suspense>
   );
 };
 
